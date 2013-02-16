@@ -110,18 +110,18 @@ body {
 #movieWrap #slider li:last-child {
   float: right;
 }
-#movieWrap #slider .line {
-  width: 464px;
+#movieWrap #slider input {
+  -webkit-appearance:none;
+  display: block;
+  width: 496px;
   height: 4px;
-  margin: 19px auto;
+  margin: 19px 0;
   background: -webkit-gradient(linear,left top,left bottom,from(#b2b2b2),to(#555));
 }
-#movieWrap #slider .point {
+#movieWrap #slider input::-webkit-slider-thumb {
+ -webkit-appearance:none;
   width: 32px;
   height: 32px;
-  position: absolute;
-  left: 0;
-  top: 17px;;
   background: url(images/point.png) 0 0 no-repeat;
   background-size: 32px 32px;
   z-index: 1;
