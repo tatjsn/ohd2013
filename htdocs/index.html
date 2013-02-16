@@ -5,6 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Script-Type" content="text/javascript" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="viewport" content="width=device-width" />
     <title>Test</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.8.1/build/cssreset/cssreset-min.css">
 
@@ -25,28 +26,39 @@
 
             </div>
             <div id="movie">
-              <video src="cm.mp4" style="width:100%"></video>
+              <video src="cm.mp4"></video>
               <div id="grad">
               </div>
               <p>このフォントサイズは40pxです。見えるか</p>
             </div>
 
+            <div id="slider">
+              <ul class="time">
+                <li>0:00</li>
+                <li>1:15</li>
+              </ul>
+              <div class="line">
+              </div>
+              <div class="point">
+              </div>
+            </div>
+
+
             <div id="sound">
-              <span class="time">---</span>
               <span class="loading">Loading...</span>
             </div>
 
             <div id="ctrl">
               <ul>
-                <li><a href="#"><img src="images/button1.jpg" height="48"></a></li>
-                <li><a href="#" class="prev"><img src="images/button2.jpg" height="48"></a></li>
-                <li><a href="#" class="play"><img src="images/button3.jpg" height="48"></a></li>
-                <li><a href="#" class="next"><img src="images/button4.jpg" height="48"></a></li>
-                <li><a href="#" class="fullscr"><img src="images/button5.jpg" height="48"></a></li>
+                <li><a href="#" class="vol"></a></li>
+                <li><a href="#" class="prev"></a></li>
+                <li><a href="#" class="play"></a></li>
+                <li><a href="#" class="next"></a></li>
+                <li><a href="#" class="fullscr"></a></li>
               </ul>
             </div>
             <div id="pon">
-              <p><a href="#"><img src="images/pon.jpg" height="64"></a></p>
+              <p><a href="#" class="pon"><img src="images/pon_button.png" height="64"></a></p>
             </div>
           </div>
 
@@ -84,6 +96,13 @@
         </ul>
       </div>
     </body>
+<script type="text/x-template" id="iw-template">
+<input type="text" value="<%= value %>">
+<div>
+<button class="ok">決定</button>
+<button class="cancel">やめた</button>
+</div>
+</script>
 <script src="js/video-widget.js"></script>
 <script>
 (function() {
