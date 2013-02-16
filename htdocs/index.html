@@ -1,0 +1,29 @@
+<html>
+  <head>
+<title></title>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="js/backbone-min.js"></script>
+</head>
+<body>
+  <div id="vw-wrapper"></div>
+</body>
+<script type="text/x-template" id="vw-template">
+<div>
+  <video src="cm.mp4"></video>
+</div>
+<div>
+<button class="prev">Prev</button>
+<button class="play">PlayPause</button>
+<button class="next">Next</button>
+</div>
+</script>
+<script src="js/video-widget.js"></script>
+<script>
+(function() {
+    var vw = new ohd.VideoWidget({tmplSel:'#vw-template'});
+    $('#vw-wrapper').append(vw.render().el);
+})();
+</script>
+</body>
+</html>
