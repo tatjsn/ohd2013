@@ -62,7 +62,9 @@ ohd.VideoWidget = (function() {
 
         notifyCanPlay: function() {
             console.log('videoWidget: canplay');
-            this.$('.time li:nth-child(2)').html(formatTime(this.video.duration));
+            var dur = this.video.duration;
+            this.$('.time li:nth-child(2)').html(formatTime(dur));
+            this.$('#slider input').attr('max', Math.floor(dur * 1000));
             this.$('.loading').remove();
             this.$('button').prop('disabled', false);
         },
@@ -76,13 +78,18 @@ ohd.VideoWidget = (function() {
         },
 
         notifyTime: function() {
+            this.$('#slider input').val(Math.floor(this.video.currentTime * 1000));
+        },
+
+        notifySeek: function() {
+            this.video.currentTime = this.$seek.val() / 1000; //double
         },
 
         events: {
             'click .play': 'playPause',
             'click .prev': 'jumpPrev',
             'click .next': 'jumpNext',
-            'click .pon': 'pon'
+            'click .pon': 'pon',
         },
 
         initialize: function() {
@@ -91,9 +98,11 @@ ohd.VideoWidget = (function() {
             _.bindAll(this,
                       'notifyCanPlay',
                       'notifyPlay',
-                      'notifyTime');
+                      'notifyTime',
+                      'notifySeek');
             this.video = this.$('video')[0];
             this.$time = this.$('.time');
+            this.$seek = this.$('#slider input');
             // non-deligates events
             $(this.video).on({
                 canplay: this.notifyCanPlay,
@@ -101,6 +110,7 @@ ohd.VideoWidget = (function() {
                 pause: this.notifyPause,
                 timeupdate: this.notifyTime
             });
+            this.$seek.on('change', this.notifySeek);
         }
     });
 })();
