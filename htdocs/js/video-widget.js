@@ -50,18 +50,11 @@ ohd.VideoWidget = (function() {
 
         initialize: function() {
             console.log('videoWidget: initialize', this.options);
-            this.template = $(this.options.tmplSel).html();
             // for non-deligates events
             _.bindAll(this,
                       'notifyCanPlay',
                       'notifyPlay',
                       'notifyTime');
-
-        },
-
-        render: function() {
-            console.log('videoWidget: render');
-            this.$el.html(this.template);
             this.video = this.$('video')[0];
             this.$time = this.$('.time');
             // non-deligates events
@@ -71,7 +64,6 @@ ohd.VideoWidget = (function() {
                 pause: this.notifyPause,
                 timeupdate: this.notifyTime
             });
-            return this;
         }
     });
 })();

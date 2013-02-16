@@ -25,6 +25,7 @@
 
             </div>
             <div id="movie">
+              <video src="cm.mp4" style="width:100%"></video>
               <div id="grad">
               </div>
               <p>このフォントサイズは40pxです。見えるか</p>
@@ -36,10 +37,10 @@
             <div id="ctrl">
               <ul>
                 <li><a href="#"><img src="images/button1.jpg" height="48"></a></li>
-                <li><a href="#"><img src="images/button2.jpg" height="48"></a></li>
-                <li><a href="#"><img src="images/button3.jpg" height="48"></a></li>
-                <li><a href="#"><img src="images/button4.jpg" height="48"></a></li>
-                <li><a href="#"><img src="images/button5.jpg" height="48"></a></li>
+                <li><a href="#" class="prev"><img src="images/button2.jpg" height="48"></a></li>
+                <li><a href="#" class="play"><img src="images/button3.jpg" height="48"></a></li>
+                <li><a href="#" class="next"><img src="images/button4.jpg" height="48"></a></li>
+                <li><a href="#" class="fullscr"><img src="images/button5.jpg" height="48"></a></li>
               </ul>
             </div>
             <div id="pon">
@@ -81,25 +82,11 @@
         </ul>
       </div>
     </body>
-<script type="text/x-template" id="vw-template">
-<div>
-  <video src="cm.mp4"></video>
-</div>
-<div>
-<button class="prev" disabled>Prev</button>
-<button class="play" disabled>PlayPause</button>
-<button class="next" disabled>Next</button>
-<span class="time">---</span>
-</div>
-<div class="loading">
-Now Loading...
-</div>
-</script>
 <script src="js/video-widget.js"></script>
 <script>
 (function() {
-    var vw = new ohd.VideoWidget({tmplSel:'#vw-template'});
-    $('#vw-wrapper').append(vw.render().el);
+    var vw = new ohd.VideoWidget({el:'#vw-wrapper'});
+    $('#vw-wrapper').append(vw.el);
 })();
 </script>
 </html>
