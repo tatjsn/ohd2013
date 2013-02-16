@@ -66,6 +66,25 @@ body {
   margin: 0;
   z-index: 100;
 }
+#movieWrap #movie .ponInput {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+#movieWrap #movie .ponInput input {
+  display: block;
+  width: 476px;
+  font-size: 20px;
+  text-shadow: #000 2px 1px 2px;
+  height: 48px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 0 10px;
+  text-align: center;
+}
 #movieWrap #grad {
   width: 496px;
   height: 279px;
