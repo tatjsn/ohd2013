@@ -223,6 +223,9 @@ body {
   width: 224px;
   margin: 0 auto 18px;
 }
+#sideWrap li:first-child {
+  margin-top: -96px;
+}
 #sideWrap li span {
   font-size: 9px;
   color: #989898;
