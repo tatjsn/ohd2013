@@ -140,16 +140,27 @@ body {
   display: block;
   width: 96px;
   height: 48px;
-  background-size: 96px 48px;
-  text-align: 9999px;
+  text-indent: -9999px;
 }
-#movieWrap #ctrl li a.vol { background: url(images/volume.png) 0 0 no-repeat;background-size: 96px 48px;}
-#movieWrap #ctrl li a.prev { background: url(images/back.png) 0 0 no-repeat;background-size: 96px 48px;}
-#movieWrap #ctrl li a.play { background: url(images/play.png) 0 0 no-repeat;background-size: 96px 48px;}
-#movieWrap #ctrl li a.next { background: url(images/next.png) 0 0 no-repeat;background-size: 96px 48px;}
-#movieWrap #ctrl li a.fullscr { background: url(images/fullscreen.png) 0 0 no-repeat; background-size: 96px 48px;}
+.vol { background: url(images/volume.png) 0 0 no-repeat;background-size: 96px 48px;}
+.prev { background: url(images/back.png) 0 0 no-repeat;background-size: 96px 48px;}
+.play { background: url(images/play.png) 0 0 no-repeat;background-size: 96px 48px;}
+.pause { background: url(images/pause.png) 0 0 no-repeat;background-size: 96px 48px;}
+.next { background: url(images/next.png) 0 0 no-repeat;background-size: 96px 48px;}
+.fullscr { background: url(images/fullscreen.png) 0 0 no-repeat; background-size: 96px 48px;}
+
+.prev.hover { background: url(images/back_f.png) 0 0 no-repeat;background-size: 96px 48px;}
+.play.hover { background: url(images/play_f.png) 0 0 no-repeat;background-size: 96px 48px;}
+.pause.hover { background: url(images/pause_f.png) 0 0 no-repeat;background-size: 96px 48px;}
+.next.hover { background: url(images/next_f.png) 0 0 no-repeat;background-size: 96px 48px;}
+.fullscr.hover { background: url(images/fullscreen_f.png) 0 0 no-repeat; background-size: 96px 48px;}
 #movieWrap #ctrl li:not(last-child) {
   margin-right: 4px;
+}
+
+#moviewrap #ctrl li a.vol {
+  background: url(images/volume.png) 0 0 no-repeat;
+  background-size: 96px 48px;
 }
 
 #pon {
@@ -271,7 +282,64 @@ body {
   float: left;
 }
 #bottomWrap li div {
-  height: 100%;
+  height: 128px;
+  width: 128px;
+}
+#bottomWrap li .mov1 div {
+  background: url(images/movie_item_1.png) 0 0 no-repeat;
+  background-size: 128px 128px;
+}
+#bottomWrap li .mov2 div {
+  background: url(images/movie_item_2.png) 0 0 no-repeat;
+  background-size: 128px 128px;
+}
+#bottomWrap li .mov3 div {
+  background: url(images/movie_item_3.png) 0 0 no-repeat;
+  background-size: 128px 128px;
+}
+#bottomWrap li .mov4 div {
+  background: url(images/movie_item_4.png) 0 0 no-repeat;
+  background-size: 128px 128px;
+}
+#bottomWrap li .mov5 div {
+  background: url(images/movie_item_5.png) 0 0 no-repeat;
+  background-size: 128px 128px;
+}
+#bottomWrap li .mov6 div {
+  background: url(images/movie_item_6.png) 0 0 no-repeat;
+  background-size: 128px 128px;
+}
+#bottomWrap li .mov7 div {
+  background: url(images/movie_item_7.png) 0 0 no-repeat;
+  background-size: 128px 128px;
+}
+#bottomWrap li .mov1.current div {
+  background: url(images/movie_item_1_f.png) 0 0 no-repeat;
+  background-size: 128px 128px;
+}
+#bottomWrap li .mov2.current div {
+  background: url(images/movie_item_2_f.png) 0 0 no-repeat;
+  background-size: 128px 128px;
+}
+#bottomWrap li .mov3.current div {
+  background: url(images/movie_item_3_f.png) 0 0 no-repeat;
+  background-size: 128px 128px;
+}
+#bottomWrap li .mov4.current div {
+  background: url(images/movie_item_4_f.png) 0 0 no-repeat;
+  background-size: 128px 128px;
+}
+#bottomWrap li .mov5.current div {
+  background: url(images/movie_item_5_f.png) 0 0 no-repeat;
+  background-size: 128px 128px;
+}
+#bottomWrap li .mov6.current div {
+  background: url(images/movie_item_6_f.png) 0 0 no-repeat;
+  background-size: 128px 128px;
+}
+#bottomWrap li .mov7.current div {
+  background: url(images/movie_item_7_f.png) 0 0 no-repeat;
+  background-size: 128px 128px;
 }
 #bottomWrap li div p {
   font-size: 8px;
