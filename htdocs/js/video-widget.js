@@ -1,4 +1,29 @@
 var ohd = ohd || {};
+ohd.InputWidget = (function() {
+    return Backbone.View.extend({
+        done: function() {
+            //TODO 華麗なアニメーション
+        },
+        cancel: function() {
+            this.$el.remove();
+        },
+        events: {
+            'click .ok': 'done',
+            'click .cancel': 'cancel',
+        },
+        initialize: function() {
+            this.tmpl = _.template($('#iw-template').html());
+        },
+        render: function() {
+            var data = {
+                value: (this.options.value)? this.options.value: ''
+            };
+            this.$el.html(this.tmpl(data));
+            return this;
+        }
+    });
+})();
+
 ohd.VideoWidget = (function() {
     return Backbone.View.extend({
         playPause: function () {
@@ -16,6 +41,13 @@ ohd.VideoWidget = (function() {
 
         jumpNext: function () {
             console.log('videoWidget: jumpNext');
+        },
+
+        pon: function() {
+            var input = new ohd.InputWidget({value:'面白いこと書いて！'});
+            this.video.pause();
+            input.render().$el.appendTo(this.$('#movie'));
+            //TODO ほかのボタンを押せないようにする
         },
 
         notifyCanPlay: function() {
@@ -45,7 +77,8 @@ ohd.VideoWidget = (function() {
         events: {
             'click .play': 'playPause',
             'click .prev': 'jumpPrev',
-            'click .next': 'jumpNext'
+            'click .next': 'jumpNext',
+            'click .pon': 'pon'
         },
 
         initialize: function() {
