@@ -198,6 +198,7 @@ body {
   height: 800px;
   margin-bottom: 49px;
   overflow: scroll;
+  -webkit-overflow-scrolling: touch
 }
 #sideWrap li {
   width: 224px;
