@@ -169,7 +169,7 @@ body {
   top: 0;
   background: url("images/left_line.png") 0 0 repeat-y #ccc;
   background-size: 3px 1px;
-  height: 800px;
+  height: 760px;
 }
 #sideWrap:after {
   content: "";
@@ -214,7 +214,7 @@ body {
   margin: 0;
   background: url("images/right_line.png") 100% 0 repeat-y;
   background-size: 3px 1px;
-  height: 800px;
+  height: 760px;
   margin-bottom: 49px;
   overflow: scroll;
   -webkit-overflow-scrolling: touch
