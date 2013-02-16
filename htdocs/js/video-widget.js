@@ -1,15 +1,14 @@
 var ohd = ohd || {};
 ohd.InputWidget = (function() {
     return Backbone.View.extend({
-        done: function() {
-            //TODO 華麗なアニメーション
-        },
-        cancel: function() {
-            this.$el.remove();
+        keyup: function(e) {
+            if (e.keyCode == 13) {
+                //TODO 時間、文言を記録
+                this.$el.remove();
+            }
         },
         events: {
-            'click .ok': 'done',
-            'click .cancel': 'cancel',
+            'keyup input': 'keyup',
         },
         initialize: function() {
             this.tmpl = _.template($('#iw-template').html());
@@ -25,6 +24,15 @@ ohd.InputWidget = (function() {
 })();
 
 ohd.VideoWidget = (function() {
+    function formatTime(sec) {
+        var m = Math.floor(sec / 60),
+        s = Math.floor(sec % 60);
+        return '' +
+            ((m < 10)? '0'+m: m) +
+            ':' +
+            ((s < 10)? '0'+s: s);
+    }
+
     return Backbone.View.extend({
         playPause: function () {
             console.log('videoWidget: playPause');
@@ -44,7 +52,9 @@ ohd.VideoWidget = (function() {
         },
 
         pon: function() {
-            var input = new ohd.InputWidget({value:'面白いこと書いて！'});
+            var input = new ohd.InputWidget({
+                className:'ponInput',
+                value:'面白いこと書いて！'});
             this.video.pause();
             input.render().$el.appendTo(this.$('#movie'));
             //TODO ほかのボタンを押せないようにする
@@ -52,6 +62,7 @@ ohd.VideoWidget = (function() {
 
         notifyCanPlay: function() {
             console.log('videoWidget: canplay');
+            this.$('.time li:nth-child(2)').html(formatTime(this.video.duration));
             this.$('.loading').remove();
             this.$('button').prop('disabled', false);
         },
@@ -65,13 +76,6 @@ ohd.VideoWidget = (function() {
         },
 
         notifyTime: function() {
-            var time = this.video.currentTime,
-            m = Math.floor(time / 60),
-            s = Math.floor(time % 60);
-            this.$time.html('' +
-                            ((m < 10)? '0'+m: m) +
-                            ':' +
-                            ((s < 10)? '0'+s: s));
         },
 
         events: {
