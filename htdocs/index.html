@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <meta name="viewport" content="width=device-width" />
     <title>Test</title>
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.8.1/build/cssreset/cssreset-min.css">
+    <link rel="stylesheet" type="text/css" href="cssreset-min.css">
     <link rel="stylesheet" href="common.css" type="text/css" />
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/underscore-min.js"></script>
@@ -92,4 +92,14 @@
         </ul>
       </div>
     </body>
+<script type="text/x-template" id="iw-template">
+<input type="text" value="<%= value %>">
+</script>
+<script src="js/video-widget.js"></script>
+<script>
+(function() {
+    var vw = new ohd.VideoWidget({el:'#vw-wrapper'});
+    $('#vw-wrapper').append(vw.el);
+})();
+</script>
 </html>
