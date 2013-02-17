@@ -34,13 +34,14 @@ ohd.VideoWidget = (function() {
     }
 
     return Backbone.View.extend({
-        playPause: function () {
-            console.log('videoWidget: playPause');
-            if (this.video.paused) {
-                this.video.play();
-            } else {
-                this.video.pause();
-            }
+        play: function () {
+            console.log('videoWidget: play');
+            this.video.play();
+        },
+
+        pause: function () {
+            console.log('videoWidget: pause');
+            this.video.pause();
         },
 
         jumpPrev: function () {
@@ -70,11 +71,13 @@ ohd.VideoWidget = (function() {
         },
 
         notifyPlay: function() {
-            console.log('videoWidget: play #change display here!');
+            console.log('videoWidget: notifyPause');
+            this.$('.play').removeClass('play').addClass('pause');
         },
 
         notifyPause: function() {
             console.log('videoWidget: pause #change display here!');
+            this.$('.pause').removeClass('pause').addClass('play');
         },
 
         notifyTime: function() {
@@ -86,7 +89,8 @@ ohd.VideoWidget = (function() {
         },
 
         events: {
-            'click .play': 'playPause',
+            'click .play': 'play',
+            'click .pause': 'pause',
             'click .prev': 'jumpPrev',
             'click .next': 'jumpNext',
             'click .pon': 'pon',
@@ -98,6 +102,7 @@ ohd.VideoWidget = (function() {
             _.bindAll(this,
                       'notifyCanPlay',
                       'notifyPlay',
+                      'notifyPause',
                       'notifyTime',
                       'notifySeek');
             this.video = this.$('video')[0];

@@ -149,11 +149,11 @@ body {
 .next { background: url(images/next.png) 0 0 no-repeat;background-size: 96px 48px;}
 .fullscr { background: url(images/fullscreen.png) 0 0 no-repeat; background-size: 96px 48px;}
 
-.prev.hover { background: url(images/back_f.png) 0 0 no-repeat;background-size: 96px 48px;}
-.play.hover { background: url(images/play_f.png) 0 0 no-repeat;background-size: 96px 48px;}
-.pause.hover { background: url(images/pause_f.png) 0 0 no-repeat;background-size: 96px 48px;}
-.next.hover { background: url(images/next_f.png) 0 0 no-repeat;background-size: 96px 48px;}
-.fullscr.hover { background: url(images/fullscreen_f.png) 0 0 no-repeat; background-size: 96px 48px;}
+.prev:active { background: url(images/back_f.png) 0 0 no-repeat;background-size: 96px 48px;}
+.play:active { background: url(images/play_f.png) 0 0 no-repeat;background-size: 96px 48px;}
+.pause:active { background: url(images/pause_f.png) 0 0 no-repeat;background-size: 96px 48px;}
+.next:active { background: url(images/next_f.png) 0 0 no-repeat;background-size: 96px 48px;}
+.fullscr:active { background: url(images/fullscreen_f.png) 0 0 no-repeat; background-size: 96px 48px;}
 #movieWrap #ctrl li:not(last-child) {
   margin-right: 4px;
 }
