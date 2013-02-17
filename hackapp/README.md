@@ -29,8 +29,8 @@ http://<url>:<port>/media/<movie_file>?type=thumbnail&msec=<msec>&width=<px>&hei
 
 <movie_file> This file must be deployed in media directory. 
 <msec>       The start time. If omitted, 0 is used.
-<width>      The unit is px. If omitted, 500 is used.
-<height>     The unis is px. If omitted, 300 is used.
+<width>      The unit is px. If omitted, 640 is used.
+<height>     The unis is px. If omitted, 480 is used.
 
 ```
 
@@ -49,8 +49,8 @@ Request
 http://<url>:<port>/media/<movie_file>?type=audioWave&width=<px>&height=<px>
 
 <movie_file> This file must be deployed in media directory. 
-<width>      The unit is px. If omitted, 500 is used.
-<height>     The unis is px. If omitted, 300 is used.
+<width>      The unit is px. If omitted, 640 is used.
+<height>     The unis is px. If omitted, 480 is used.
 
 ```
 

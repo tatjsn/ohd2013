@@ -37,8 +37,8 @@ app.get('/users', user.list);
 
 var MEDIA_DIR = '/media';
 var DEFAULT_MSEC = 0;
-var DEFAULT_WIDTH = 500;
-var DEFAULT_HEIGHT = 300;
+var DEFAULT_WIDTH = 640;
+var DEFAULT_HEIGHT = 360;
 
 app.use('/media', function (req, res, next) {
   var media_file = req.url;
