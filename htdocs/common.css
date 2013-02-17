@@ -65,6 +65,10 @@ body {
   margin: 0;
   z-index: 100;
 }
+.full #movieWrap #movie p {
+  font-size: 32px;
+  width: 100%;
+}
 #movieWrap #movie .ponInput {
   position: absolute;
   bottom: 0;
