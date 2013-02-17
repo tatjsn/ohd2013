@@ -51,7 +51,6 @@ body {
 #movieWrap #movie {
   width: 496px;
   height: 279px;
-  background: #cc0000;
   position: relative;
   z-index: 0;
 }
@@ -130,7 +129,6 @@ body {
 #movieWrap #sound {
   width: 496px;
   height: 72px;
-  background: #cc0000;
   margin-top: 20px;
 }
 #movieWrap #ctrl ul {
@@ -188,7 +186,7 @@ body {
   z-index: :0;
   right: 0;
   top: 0;
-  background: url("images/left_line.png") 0 0 repeat-y #ccc;
+  background: url("images/left_line.png") 0 0 repeat-y #262626;
   background-size: 3px 1px;
   height: 760px;
 }
