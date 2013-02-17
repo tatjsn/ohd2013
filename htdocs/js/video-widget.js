@@ -25,6 +25,7 @@ ohd.fullScreen = (function() {
                 height: 'auto'
             });
             this.$hide.css('opacity', 0);
+            $(document.body).addClass('full');
         },
         exit: function() {
             this.$full.css({
@@ -32,6 +33,7 @@ ohd.fullScreen = (function() {
                 height: ''
             });
             this.$hide.css('opacity', '');
+            $(document.body).removeClass('full');
         }
     }
 })();
