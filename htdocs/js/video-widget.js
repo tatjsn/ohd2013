@@ -18,13 +18,22 @@ ohd.InputWidget = (function() {
                 this.$el.remove();
                 ohd.thePon.addItem(ohd.theVideo.video.currentTime,
                                    this.$('input').val());
+                ohd.theVideo.notifyTime(); //Ugh! this is rude
+            }
+        },
+        clearInitText: function() {
+            if (this.hasInitText) {
+                this.$('input').val('');
+                this.hasInitText = false;
             }
         },
         events: {
             'keyup input': 'keyup',
+            'touchstart input': 'clearInitText',
         },
         initialize: function() {
             this.text = (this.options.text)? this.options.text: '';
+            this.hasInitText = true;
         },
         render: function() {
             var data = {

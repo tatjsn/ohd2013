@@ -34,8 +34,8 @@ ohd.PonWidget = (function() {
         items: [],
         getItem: function(time) {
             for (var i=0, len=this.items.length; i < len; i++) {
-                if (time > this.items[i].time &&
-                    time <= this.items[i].time + this.items[i].duration) {
+                if (time >= this.items[i].time &&
+                    time < this.items[i].time + this.items[i].duration) {
                     //console.log('found', time);
                     return this.items[i];
                 }
@@ -54,7 +54,6 @@ ohd.PonWidget = (function() {
             this.$('a').removeClass('current');
             item.render().$el.appendTo(this.el);
             this.items.push(item);
-            console.log(item);
         },
         events: {
         },
