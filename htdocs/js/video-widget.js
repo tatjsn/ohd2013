@@ -86,7 +86,21 @@ ohd.VideoWidget = (function() {
         },
 
         notifyTime: function() {
-            this.$('#slider input').val(Math.floor(this.video.currentTime * 1000));
+            var time = this.video.currentTime,
+            pon = ohd.thePon.getItem(time);
+            this.$('#slider input').val(Math.floor(time * 1000));
+            if (pon == this.lastPon) {
+                return;
+            }
+            if (pon) {
+                console.log('update pon', pon.text);
+                this.$('#movie p').remove();
+                $('<p>'+pon.text+'</p>').appendTo('#movie');
+            } else {
+                console.log('end pon');
+                this.$('#movie p').remove();
+            }
+            this.lastPon = pon;
         },
 
         notifySeek: function() {
@@ -113,6 +127,7 @@ ohd.VideoWidget = (function() {
             this.video = this.$('video')[0];
             this.$time = this.$('.time');
             this.$seek = this.$('#slider input');
+            this.lastPon = null;
             // non-deligates events
             $(this.video).on({
                 canplay: this.notifyCanPlay,
