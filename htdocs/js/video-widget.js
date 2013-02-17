@@ -1,6 +1,41 @@
 var ohd = ohd || {};
 
 // Ugh! separate file
+
+ohd.fullScreen = (function() {
+    return {
+        init: function(o) {
+            _.bindAll(this, 'handleClick');
+            this.$noExit = $(o.noExit);
+            this.$full = $(o.full);
+            this.$hide = $(o.hide);
+        },
+        handleClick: function(e) {
+            if (e.target != this.$noExit[0]) {
+                $(window).off('click');
+                this.exit();
+            }
+        },
+        enter: function() {
+            var width = $(window)
+                .on('click', this.handleClick)
+                .width();
+            this.$full.css({
+                width: width+'px',
+                height: 'auto'
+            });
+            this.$hide.css('opacity', 0);
+        },
+        exit: function() {
+            this.$full.css({
+                width: '',
+                height: ''
+            });
+            this.$hide.css('opacity', '');
+        }
+    }
+})();
+
 ohd.formatTime = function(sec) {
         var m = Math.floor(sec / 60),
         s = Math.floor(sec % 60);
@@ -13,41 +48,39 @@ ohd.formatTime = function(sec) {
 ohd.InputWidget = (function() {
     var tmpl = _.template($('#iw-template').html());
     return Backbone.View.extend({
-        keyup: function(e) {
-            if (e.keyCode == 13) {
-                var text = this.$('input').val();
-                this.$el.remove();
-                ohd.theVideo.notifyInputDone();
-                if (text !== '') {
+        done: function() {
+            var text = this.$('input').val();
+            this.$el.remove();
+            ohd.theVideo.notifyInputDone();
+            if (text !== '') {
+                if (!this.edit) {
                     ohd.thePon.addItem(ohd.theVideo.video.currentTime, text);
-                    ohd.theVideo.notifyTime(); //Ugh! this is rude
+                } else {
+                    this.edit.text = text;
+                    this.edit.render();
                 }
+                ohd.theVideo.notifyTime(); //Ugh! this is rude
             }
         },
-        clearInitText: function() {
-            if (this.hasInitText) {
-                this.$('input').val('');
-                this.hasInitText = false;
+        keyup: function(e) {
+            if (e.keyCode == 13) {
+                this.done();
             }
         },
         focusInput: function() {
             this.$('input').focus();
         },
         notifyInputBlur: function() {
-            if (this.hasInitText) {
-                this.$el.remove();
-                ohd.theVideo.notifyInputDone();
-            }
+            this.$el.remove();
+            ohd.theVideo.notifyInputDone();
+            ohd.theVideo.notifyTime(); //Ugh! this is rude
         },
         events: {
             'keyup input': 'keyup',
-            'touchstart input': 'clearInitText'
         },
         initialize: function() {
-            this.text = (this.options.text)? this.options.text: '';
-            if (this.text.length > 0) {
-                this.hasInitText = true;
-            }
+            this.edit = this.options.edit;
+            this.text = this.options.text;
             _.bindAll(this, 'notifyInputBlur');
         },
         render: function() {
@@ -89,9 +122,23 @@ ohd.VideoWidget = (function() {
                 this.video.currentTime = this.lastPon.time;
             } else if (!this.input) {
                 var input = new ohd.InputWidget({
-                    className:'ponInput',
-                    text:this.options.initText});
+                    className:'ponInput'
+                });
                 this.video.pause();
+                input.render().$el.appendTo(this.$('#movie'));
+                input.focusInput();
+                this.input = input;
+            }
+        },
+
+        editPon: function(ponItem) {
+            this.$('#movie p').remove();
+            if (!this.input) {
+                var input = new ohd.InputWidget({
+                    className:'ponInput',
+                    text:ponItem.text,
+                    edit: ponItem
+                });
                 input.render().$el.appendTo(this.$('#movie'));
                 input.focusInput();
                 this.input = input;
@@ -100,6 +147,11 @@ ohd.VideoWidget = (function() {
 
         seek: function(time) {
             this.video.currentTime = time;
+        },
+
+        fullScreen: function(e) {
+            ohd.fullScreen.enter();
+            e.stopPropagation();
         },
 
         notifyCanPlay: function() {
@@ -125,7 +177,7 @@ ohd.VideoWidget = (function() {
             var time = this.video.currentTime,
             pon = ohd.thePon.getItem(time);
             this.$('#slider input').val(Math.floor(time * 1000));
-            if (pon == this.lastPon) {
+            if (pon == this.lastPon || this.input) {
                 return;
             }
             if (pon) {
@@ -154,6 +206,7 @@ ohd.VideoWidget = (function() {
             'click .pause': 'pause',
             'click .prev': 'jumpPrev',
             'click .next': 'jumpNext',
+            'click .fullscr': 'fullScreen',
             'click .pon': 'pon',
         },
 

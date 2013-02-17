@@ -42,6 +42,7 @@ if __name__ == '__main__':
     ax.yaxis.set_visible(False)
     #for spine in ax.spines.itervalues():
     #    spine.set_visible(False)
+
     ax1 = plt.axes(frameon=False)
     ax1.set_frame_on(False)
     ax1.axes.get_yaxis().set_visible(False)
@@ -50,20 +51,27 @@ if __name__ == '__main__':
     ax1.set_xticks([])
     ax1.set_yticks([])
 
-    #ax1.set_xmargin(0)
-    #ax1.set_ymargin(0)
+    margins = [0.1, 0.1, 0.5, 0.8]
+    plt.margins(0,0)
+    
     # axes(axisbg="#777777") # 背景
 
-    plt.axis('off')
-    #plt.xlim(0,h)
+    #plt.axis('off')
+    #plt.xlim(0, 100)
     #plt.ylim(w,0)
 
-    plt.figure(num=None, figsize=(width,height), dpi=96, frameon=False, )
+    f = plt.figure(num=None, figsize=(width,height), dpi=96, frameon=False, )
     #plt.majorticks_off()
     # プロット
+
+    plt.margins(0, 0)
+    plt.autoscale(tight=True)
+
+    ax1.set_xmargin(0)
+    ax1.set_ymargin(0)
+    
     plt.plot(data, "k")
     plt.axis('off')
+    #plt.xlim(0, 100000)
     plt.savefig(argvs[4], bbox_inches='tight', pad_inches=0)
-    #plt.savefig(argvs[4], bbox_inches='tight')
     #show()
-
