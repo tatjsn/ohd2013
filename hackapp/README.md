@@ -2,6 +2,16 @@ Deploy
 ======
 $ npm install -d
 
+Put movie file
+---------------
+$ ls .
+app.js
+...
+
+$ cp <mp4 file> media/
+
+
+
 Run
 ===
 $ PORT=80 node app.js
