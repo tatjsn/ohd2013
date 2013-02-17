@@ -252,10 +252,10 @@ body {
 }
 #sideWrap li {
   width: 224px;
-  margin: 0 auto 18px;
+  margin: 0 auto 15px;
 }
 #sideWrap li:first-child {
-  margin-top: 66px;
+  margin-top: 62px;
 }
 #sideWrap li span {
   font-size: 9px;
