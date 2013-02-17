@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-JP" xml:lang="ja-JP">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <title>Test</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.8.1/build/cssreset/cssreset-min.css">
+
+    <link rel="stylesheet" href="common.css" type="text/css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/backbone-min.js"></script>
+  </head>
+  <body>
+    <div id="vw-wrapper">
+      <div id="wrapper">
+
+        <div id="mainWrap">
+          <div id="movieWrap">
+            <div id="ttl">
+              <img src="images/youtubeIcon.jpg" height="24">
+              <h1>A GOOD DAY TO DIE HARD - Official Trailer</h1>
+
+            </div>
+            <div id="movie">
+              <div id="grad">
+              </div>
+              <p>このフォントサイズは40pxです。見えるか</p>
+            </div>
+
+            <div id="sound">
+            </div>
+
+            <div id="ctrl">
+              <ul>
+                <li><a href="#"><img src="images/button1.jpg" height="48"></a></li>
+                <li><a href="#"><img src="images/button2.jpg" height="48"></a></li>
+                <li><a href="#"><img src="images/button3.jpg" height="48"></a></li>
+                <li><a href="#"><img src="images/button4.jpg" height="48"></a></li>
+                <li><a href="#"><img src="images/button5.jpg" height="48"></a></li>
+              </ul>
+            </div>
+            <div id="pon">
+              <p><a href="#"><img src="images/pon.jpg" height="64"></a></p>
+            </div>
+          </div>
+
+
+        </div>
+
+
+        <div id="sideWrap">
+          <ul>
+            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
+            <li><a href="#" class="current"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
+            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
+            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
+            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
+            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
+            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
+            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
+
+          </ul>
+        </div>
+
+
+
+
+      </div>
+      <div id="bottomWrap">
+        <ul>
+          <li><a href="#"><div><img src="images/movie_item_1.png" width="128px"><p>movie title fontsize 8px</p></div></a></li>
+          <li><a href="#"><div><img src="images/movie_item_2.png" width="128px"><p>movie title fontsize 8px</p></div></a></li>
+          <li><a href="#"><div><img src="images/movie_item_3.png" width="128px"><p>movie title fontsize 8px</p></div></a></li>
+          <li><a href="#"><div><img src="images/movie_item_4.png" width="128px"><p>movie title fontsize 8px</p></div></a></li>
+          <li><a href="#"><div><img src="images/movie_item_5.png" width="128px"><p>movie title fontsize 8px</p></div></a></li>
+          <li><a href="#"><div><img src="images/movie_item_6.png" width="128px"><p>movie title fontsize 8px</p></div></a></li>
+          <li><a href="#"><div><img src="images/movie_item_7.png" width="128px"><p>movie title fontsize 8px</p></div></a></li>
+        </ul>
+      </div>
+    </body>
+<script type="text/x-template" id="vw-template">
+<div>
+  <video src="cm.mp4"></video>
+</div>
+<div>
+<button class="prev">Prev</button>
+<button class="play">PlayPause</button>
+<button class="next">Next</button>
+</div>
+</script>
+<script src="js/video-widget.js"></script>
+<script>
+(function() {
+    var vw = new ohd.VideoWidget({tmplSel:'#vw-template'});
+    $('#vw-wrapper').append(vw.render().el);
+})();
+</script>
+</html>
