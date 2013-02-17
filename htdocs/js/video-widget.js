@@ -99,6 +99,14 @@ ohd.InputWidget = (function() {
 ohd.VideoWidget = (function() {
 
     return Backbone.View.extend({
+        playPause: function () {
+            console.log('videoWidget: playPause');
+            if (this.video.paused) {
+                this.video.play();
+            } else {
+                this.video.pause();
+            }
+        },
         play: function () {
             console.log('videoWidget: play');
             this.video.play();
@@ -204,6 +212,7 @@ ohd.VideoWidget = (function() {
         },
 
         events: {
+            'click video': 'playPause',
             'click .play': 'play',
             'click .pause': 'pause',
             'click .prev': 'jumpPrev',
