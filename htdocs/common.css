@@ -170,7 +170,17 @@ body {
   width: 296px;
   margin: 0 auto;
 }
-
+#pon a {
+  display: block;
+  width: 296px;
+  height: 64px;
+  background: url(images/pon_button.png) 0 0 no-repeat;
+  background-size: 296px 64px;
+}
+#pon a:active {
+  background: url(images/pon_button_f.png) 0 0 no-repeat;
+  background-size: 296px 64px;
+}
 
 #sideWrap {
   width: 240px;
