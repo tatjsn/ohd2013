@@ -14,7 +14,6 @@
     <script src="js/backbone-min.js"></script>
   </head>
   <body>
-    <div id="vw-wrapper">
       <div id="wrapper">
 
         <div id="mainWrap">
@@ -101,13 +100,12 @@
 <script>
 (function() {
     ohd.theVideo = new ohd.VideoWidget({
-        el:'#vw-wrapper',
+        el:'#movieWrap',
         initText:'面白いこと書いて！'
     });
     ohd.thePon = new ohd.PonWidget({
         el:'#sideWrap ul'
     });
-    //$('#vw-wrapper').append(vw.el);
 })();
 </script>
 </html>
