@@ -199,7 +199,7 @@ body {
   content: "";
   display: block;
   width: 240px;
-  height: 760px;
+  height: 720px;
   background: url(images/blank.png) 0 0 repeat-y;
   background-size: 234px 158px;
   position: absolute;
