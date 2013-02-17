@@ -92,4 +92,14 @@
         </ul>
       </div>
     </body>
+<script type="text/x-template" id="iw-template">
+<input type="text" value="<%= value %>">
+</script>
+<script src="js/video-widget.js"></script>
+<script>
+(function() {
+    var vw = new ohd.VideoWidget({el:'#vw-wrapper'});
+    $('#vw-wrapper').append(vw.el);
+})();
+</script>
 </html>
