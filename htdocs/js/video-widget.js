@@ -96,6 +96,10 @@ ohd.VideoWidget = (function() {
             }
         },
 
+        seek: function(time) {
+            this.video.currentTime = time;
+        },
+
         notifyCanPlay: function() {
             console.log('videoWidget: canplay');
             var dur = this.video.duration;
@@ -126,9 +130,11 @@ ohd.VideoWidget = (function() {
                 console.log('update pon', pon.text);
                 this.$('#movie p').remove();
                 $('<p>'+pon.text+'</p>').appendTo('#movie');
+                ohd.thePon.activateItem(pon, true /* no seek */);
             } else {
                 console.log('end pon');
                 this.$('#movie p').remove();
+                ohd.thePon.activateItem(null); //remove focus
             }
             this.lastPon = pon;
         },

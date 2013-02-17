@@ -5,10 +5,16 @@ var ohd = ohd || {};
 ohd.PonItemWidget = (function() {
     var tmpl = _.template($('#pi-template').html());
     return Backbone.View.extend({
-        seekVideo: function() {
+        activate: function(noSeek) {
+            ohd.thePon.activateItem(null);
+            this.$('a').addClass('current');
+            if (noSeek !== true) {
+                console.log('seek');
+                ohd.theVideo.seek(this.time);
+            }
         },
         events: {
-            'click': 'seekVideo',
+            'click': 'activate',
         },
         initialize: function() {
             this.text = this.options.text;
@@ -51,9 +57,15 @@ ohd.PonWidget = (function() {
                 time: time,
                 text: text
             });
-            this.$('a').removeClass('current');
+            this.$('a').removeClass('current'); // all items
             item.render().$el.appendTo(this.el);
             this.items.push(item);
+        },
+        activateItem: function(item, noSeek) {
+            this.$('a').removeClass('current'); // all items
+            if (item) {
+                item.activate(noSeek);
+            }
         },
         events: {
         },
