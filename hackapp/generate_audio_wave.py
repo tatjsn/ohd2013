@@ -63,6 +63,7 @@ if __name__ == '__main__':
     # プロット
     plt.plot(data, "k")
     plt.axis('off')
-    plt.savefig(argvs[4], bbox_inches='tight')
+    plt.savefig(argvs[4], bbox_inches='tight', pad_inches=0)
+    #plt.savefig(argvs[4], bbox_inches='tight')
     #show()
 
