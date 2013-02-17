@@ -190,6 +190,17 @@ body {
   background-size: 3px 1px;
   height: 760px;
 }
+#sideWrap:before {
+  content: "";
+  display: block;
+  width: 240px;
+  height: 760px;
+  background: url(images/blank.png) 0 0 repeat-y;
+  background-size: 234px 158px;
+  position: absolute;
+  top: 46px;
+  left: 3px;
+}
 #sideWrap:after {
   content: "";
   display: block;
