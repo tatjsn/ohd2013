@@ -9,6 +9,7 @@ ohd.fullScreen = (function() {
             this.$noExit = $(o.noExit);
             this.$full = $(o.full);
             this.$hide = $(o.hide);
+            this.$none = $(o.none);
         },
         handleClick: function(e) {
             if (e.target != this.$noExit[0]) {
@@ -25,6 +26,7 @@ ohd.fullScreen = (function() {
                 height: Math.floor(width * 9 / 16)+'px'
             });
             this.$hide.css('opacity', 0);
+            this.$none.css('display', 'none');
             $(document.body).addClass('full');
         },
         exit: function() {
@@ -33,6 +35,7 @@ ohd.fullScreen = (function() {
                 height: ''
             });
             this.$hide.css('opacity', '');
+            this.$none.css('display', '');
             $(document.body).removeClass('full');
         }
     }
