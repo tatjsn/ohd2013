@@ -3,7 +3,7 @@
 import sys 
 
 import matplotlib
-# バックエンドを Agg に変更
+# バックエンドを Agg に変更
 matplotlib.use('Agg')
 
 import wave
@@ -16,10 +16,10 @@ argvs = sys.argv
 def printWaveInfo(wf):
     """WAVEファイルの情報を取得"""
     print "チャンネル数:", wf.getnchannels()
-    print "サンプル幅:", wf.getsampwidth()
-    print "サンプリング周波数:", wf.getframerate()
+    print "サンプル幅:", wf.getsampwidth()
+    print "サンプリング周波数:", wf.getframerate()
     print "フレーム数:", wf.getnframes()
-    print "パラメータ:", wf.getparams()
+    print "パラメータ:", wf.getparams()
     print "長さ（秒）:", float(wf.getnframes()) / wf.getframerate()
 
 if __name__ == '__main__':
@@ -27,9 +27,9 @@ if __name__ == '__main__':
     # printWaveInfo(wf)
 
     buffer = wf.readframes(wf.getnframes())
-    # print len(buffer)  # バイト数 = 1フレーム2バイト x フレーム数
+    # print len(buffer)  # バイト数 = 1フレーム2バイト x フレーム数
 
-    # bufferはバイナリなので2バイトずつ整数（-32768から32767）にまとめる
+    # bufferはバイナリなので2バイトずつ整数（-32768から32767）にまとめる
     data = frombuffer(buffer, dtype="int16")
 
     width = float(argvs[2]) / 96
@@ -50,14 +50,18 @@ if __name__ == '__main__':
     ax1.set_xticks([])
     ax1.set_yticks([])
 
+    ax1.set_xmargin(0)
+    ax1.set_ymargin(0)
+    # axes(axisbg="#777777") # 背景
+
     plt.axis('off')
     #plt.xlim(0,h)
     #plt.ylim(w,0)
 
     plt.figure(num=None, figsize=(width,height), dpi=96, frameon=False, )
     #plt.majorticks_off()
-    # プロット
-    plt.plot(data)
+    # プロット
+    plt.plot(data, "k")
     plt.axis('off')
     plt.savefig(argvs[4], bbox_inches='tight')
     #show()
