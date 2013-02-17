@@ -79,6 +79,7 @@ body {
   font-size: 20px;
   text-shadow: #000 2px 1px 2px;
   height: 48px;
+  border: none;
   background: rgba(0,0,0,0.5);
   color: white;
   border: none;
@@ -142,26 +143,26 @@ body {
   height: 48px;
   text-indent: -9999px;
 }
-.vol { background: url(images/volume.png) 0 0 no-repeat;background-size: 96px 48px;}
-.prev { background: url(images/back.png) 0 0 no-repeat;background-size: 96px 48px;}
-.play { background: url(images/play.png) 0 0 no-repeat;background-size: 96px 48px;}
-.pause { background: url(images/pause.png) 0 0 no-repeat;background-size: 96px 48px;}
-.next { background: url(images/next.png) 0 0 no-repeat;background-size: 96px 48px;}
-.fullscr { background: url(images/fullscreen.png) 0 0 no-repeat; background-size: 96px 48px;}
+.vol { background: url(images/volume.png) 0 0 no-repeat;background-size: 96px 96px;}
+.prev { background: url(images/back.png) 0 0 no-repeat;background-size: 96px 96px;}
+.play { background: url(images/play.png) 0 0 no-repeat;background-size: 96px 96px;}
+.pause { background: url(images/pause.png) 0 0 no-repeat;background-size: 96px 96px;}
+.next { background: url(images/next.png) 0 0 no-repeat;background-size: 96px 96px;}
+.fullscr { background: url(images/fullscreen.png) 0 0 no-repeat; background-size: 96px 96px;}
+.vol {
+  background: url(images/volume.png) 0 0 no-repeat; background-size: 96px 96px;
+}
 
-.prev:active { background: url(images/back_f.png) 0 0 no-repeat;background-size: 96px 48px;}
-.play:active { background: url(images/play_f.png) 0 0 no-repeat;background-size: 96px 48px;}
-.pause:active { background: url(images/pause_f.png) 0 0 no-repeat;background-size: 96px 48px;}
-.next:active { background: url(images/next_f.png) 0 0 no-repeat;background-size: 96px 48px;}
-.fullscr:active { background: url(images/fullscreen_f.png) 0 0 no-repeat; background-size: 96px 48px;}
+.play:active,
+.pause:active,
+.next:active,
+.fullscr:active,
+.vol:active,
+.prev:active { background-position: bottom}
 #movieWrap #ctrl li:not(last-child) {
   margin-right: 4px;
 }
 
-#moviewrap #ctrl li a.vol {
-  background: url(images/volume.png) 0 0 no-repeat;
-  background-size: 96px 48px;
-}
 
 #pon {
   margin-top: 56px;
@@ -175,11 +176,10 @@ body {
   width: 296px;
   height: 64px;
   background: url(images/pon_button.png) 0 0 no-repeat;
-  background-size: 296px 64px;
+  background-size: 296px 128px;
 }
 #pon a:active {
-  background: url(images/pon_button_f.png) 0 0 no-repeat;
-  background-size: 296px 64px;
+  background-position: bottom;
 }
 
 #sideWrap {
