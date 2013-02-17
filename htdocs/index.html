@@ -64,15 +64,6 @@
 
         <div id="sideWrap">
           <ul>
-            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
-            <li><a href="#" class="current"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
-            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
-            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
-            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
-            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
-            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
-            <li><a href="#"><div><p>このフォントは18pxです</p></div></a><span>0:00 - 0:05 (5sec)</span></li>
-
           </ul>
         </div>
 
@@ -92,14 +83,30 @@
         </ul>
       </div>
     </body>
+<!-- 文字入力のテンプレ -->
 <script type="text/x-template" id="iw-template">
-<input type="text" value="<%= value %>">
+<input type="text" value="<%= text %>">
+</script>
+<!-- Ponアイテムのテンプレ -->
+<script type="text/x-template" id="pi-template">
+<a href="#" class="current">
+  <div>
+    <p><%= text %></p>
+  </div>
+</a>
+<span><%= timeFrom %> - <%= timeTo %> (<%= duration %>sec)</span>
 </script>
 <script src="js/video-widget.js"></script>
+<script src="js/pon-widget.js"></script>
 <script>
 (function() {
-    var vw = new ohd.VideoWidget({el:'#vw-wrapper'});
-    $('#vw-wrapper').append(vw.el);
+    ohd.theVideo = new ohd.VideoWidget({
+        el:'#vw-wrapper'
+    });
+    ohd.thePon = new ohd.PonWidget({
+        el:'#sideWrap ul'
+    });
+    //$('#vw-wrapper').append(vw.el);
 })();
 </script>
 </html>

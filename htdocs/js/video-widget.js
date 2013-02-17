@@ -1,37 +1,42 @@
 var ohd = ohd || {};
-ohd.InputWidget = (function() {
-    return Backbone.View.extend({
-        keyup: function(e) {
-            if (e.keyCode == 13) {
-                //TODO 時間、文言を記録
-                this.$el.remove();
-            }
-        },
-        events: {
-            'keyup input': 'keyup',
-        },
-        initialize: function() {
-            this.tmpl = _.template($('#iw-template').html());
-        },
-        render: function() {
-            var data = {
-                value: (this.options.value)? this.options.value: ''
-            };
-            this.$el.html(this.tmpl(data));
-            return this;
-        }
-    });
-})();
 
-ohd.VideoWidget = (function() {
-    function formatTime(sec) {
+// Ugh! separate file
+ohd.formatTime = function(sec) {
         var m = Math.floor(sec / 60),
         s = Math.floor(sec % 60);
         return '' +
             ((m < 10)? '0'+m: m) +
             ':' +
             ((s < 10)? '0'+s: s);
-    }
+};
+
+ohd.InputWidget = (function() {
+    var tmpl = _.template($('#iw-template').html());
+    return Backbone.View.extend({
+        keyup: function(e) {
+            if (e.keyCode == 13) {
+                this.$el.remove();
+                ohd.thePon.addItem(ohd.theVideo.video.currentTime,
+                                   this.$('input').val());
+            }
+        },
+        events: {
+            'keyup input': 'keyup',
+        },
+        initialize: function() {
+            this.text = (this.options.text)? this.options.text: '';
+        },
+        render: function() {
+            var data = {
+                text: this.text
+            };
+            this.$el.html(tmpl(data));
+            return this;
+        }
+    });
+})();
+
+ohd.VideoWidget = (function() {
 
     return Backbone.View.extend({
         play: function () {
@@ -55,7 +60,7 @@ ohd.VideoWidget = (function() {
         pon: function() {
             var input = new ohd.InputWidget({
                 className:'ponInput',
-                value:'面白いこと書いて！'});
+                text:'面白いこと書いて！'});
             this.video.pause();
             input.render().$el.appendTo(this.$('#movie'));
             //TODO ほかのボタンを押せないようにする
@@ -64,7 +69,7 @@ ohd.VideoWidget = (function() {
         notifyCanPlay: function() {
             console.log('videoWidget: canplay');
             var dur = this.video.duration;
-            this.$('.time li:nth-child(2)').html(formatTime(dur));
+            this.$('.time li:nth-child(2)').html(ohd.formatTime(dur));
             this.$('#slider input').attr('max', Math.floor(dur * 1000));
             this.$('.loading').remove();
             this.$('button').prop('disabled', false);
