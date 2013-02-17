@@ -52,7 +52,7 @@ if __name__ == '__main__':
     ax1.set_yticks([])
 
     margins = [0.1, 0.1, 0.5, 0.8]
-    plt.margins(0,0)
+    #plt.margins(0,0)
     
     # axes(axisbg="#777777") # 背景
 
@@ -64,11 +64,11 @@ if __name__ == '__main__':
     #plt.majorticks_off()
     # プロット
 
-    plt.margins(0, 0)
-    plt.autoscale(tight=True)
+    #plt.margins(0, 0)
+    #plt.autoscale(tight=True)
 
-    ax1.set_xmargin(0)
-    ax1.set_ymargin(0)
+    #ax1.set_xmargin(0)
+    #ax1.set_ymargin(0)
     
     plt.plot(data, "k")
     plt.axis('off')
