@@ -83,7 +83,7 @@ app.use('/media', function (req, res, next) {
     var suffix = '.msec' + msec + '_width' + width + '_height' + height + '.' + IMG_EXT;
     var path_thumbnail = path.join(__dirname, MEDIA_DIR + media_file + suffix);
     if (!path.existsSync(path_thumbnail)) {
-      var sec = msec / 1000;
+      var sec = parseInt(msec / 1000);
       var msec2 = msec % 1000;
       var cmd = '/usr/bin/ffmpeg -i ' + path.join(__dirname, MEDIA_DIR + media_file) + ' -vframes 1 -an -ss ' + sec + '.' + msec2 + ' -s ' + width + 'x' + height + '  -f image2 -vcodec ' + FFMPEG_VCODEC + ' ' + path_thumbnail;
       console.log('CMD ' + cmd);
