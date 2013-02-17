@@ -70,7 +70,7 @@ if __name__ == '__main__':
     #ax1.set_xmargin(0)
     #ax1.set_ymargin(0)
     
-    plt.plot(data, "k")
+    plt.plot(data, color="#777777")
     plt.axis('off')
     #plt.xlim(0, 100000)
     plt.savefig(argvs[4], bbox_inches='tight', pad_inches=0)
