@@ -105,6 +105,16 @@
     ohd.thePon = new ohd.PonWidget({
         el:'#sideWrap ul'
     });
+    ohd.fullScreen.init({
+        noExit: 'video',
+        full: '#movie',
+        hide: '#sideWrap,' +
+            '#bottomWrap,' +
+            '#slider,' +
+            '#sound,' +
+            '#ctrl,' +
+            '#pon'
+    });
 })();
 </script>
 </html>

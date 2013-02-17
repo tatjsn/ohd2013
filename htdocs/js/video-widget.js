@@ -1,6 +1,41 @@
 var ohd = ohd || {};
 
 // Ugh! separate file
+
+ohd.fullScreen = (function() {
+    return {
+        init: function(o) {
+            _.bindAll(this, 'handleClick');
+            this.$noExit = $(o.noExit);
+            this.$full = $(o.full);
+            this.$hide = $(o.hide);
+        },
+        handleClick: function(e) {
+            if (e.target != this.$noExit[0]) {
+                $(window).off('click');
+                this.exit();
+            }
+        },
+        enter: function() {
+            var width = $(window)
+                .on('click', this.handleClick)
+                .width();
+            this.$full.css({
+                width: width+'px',
+                height: 'auto'
+            });
+            this.$hide.css('opacity', 0);
+        },
+        exit: function() {
+            this.$full.css({
+                width: '',
+                height: ''
+            });
+            this.$hide.css('opacity', '');
+        }
+    }
+})();
+
 ohd.formatTime = function(sec) {
         var m = Math.floor(sec / 60),
         s = Math.floor(sec % 60);
@@ -102,6 +137,11 @@ ohd.VideoWidget = (function() {
             this.video.currentTime = time;
         },
 
+        fullScreen: function(e) {
+            ohd.fullScreen.enter();
+            e.stopPropagation();
+        },
+
         notifyCanPlay: function() {
             console.log('videoWidget: canplay');
             var dur = this.video.duration;
@@ -154,6 +194,7 @@ ohd.VideoWidget = (function() {
             'click .pause': 'pause',
             'click .prev': 'jumpPrev',
             'click .next': 'jumpNext',
+            'click .fullscr': 'fullScreen',
             'click .pon': 'pon',
         },
 
