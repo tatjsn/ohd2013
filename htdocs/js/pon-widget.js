@@ -24,7 +24,7 @@ ohd.PonItemWidget = (function() {
         render: function() {
             var data = {
                 text: this.text,
-                imgSrc: 'media/titan.mp4?type=thumbnail&msec=' +
+                imgSrc: 'media/chanel5.mp4?type=thumbnail&msec=' +
                     Math.floor(this.time * 1000),
                 timeFrom: ohd.formatTime(this.time),
                 timeTo: ohd.formatTime(this.time + this.duration),
