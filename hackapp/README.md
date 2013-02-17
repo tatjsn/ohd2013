@@ -24,7 +24,7 @@ Request
 --------
 * HTTP GET
 
-``
+```
 http://<url>:<port>/media/<movie_file>?type=thumbnail&msec=<msec>&width=<px>&height=<px>
 ```
 
