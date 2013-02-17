@@ -10,7 +10,9 @@ ohd.PonItemWidget = (function() {
             this.$('a').addClass('current');
             if (noSeek !== true) {
                 console.log('seek');
+                ohd.theVideo.video.pause();
                 ohd.theVideo.seek(this.time);
+                ohd.theVideo.editPon(this);
             }
         },
         events: {
@@ -18,10 +20,10 @@ ohd.PonItemWidget = (function() {
         },
         initialize: function() {
             this.text = this.options.text;
-            this.duration = this.options.text.length * 0.25;
             this.time = this.options.time;
         },
         render: function() {
+            this.duration = this.text.length * 0.25;
             var data = {
                 text: this.text,
                 imgSrc: 'media/chanel5.mp4?type=thumbnail&msec=' +

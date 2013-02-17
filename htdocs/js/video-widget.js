@@ -48,41 +48,39 @@ ohd.formatTime = function(sec) {
 ohd.InputWidget = (function() {
     var tmpl = _.template($('#iw-template').html());
     return Backbone.View.extend({
-        keyup: function(e) {
-            if (e.keyCode == 13) {
-                var text = this.$('input').val();
-                this.$el.remove();
-                ohd.theVideo.notifyInputDone();
-                if (text !== '') {
+        done: function() {
+            var text = this.$('input').val();
+            this.$el.remove();
+            ohd.theVideo.notifyInputDone();
+            if (text !== '') {
+                if (!this.edit) {
                     ohd.thePon.addItem(ohd.theVideo.video.currentTime, text);
-                    ohd.theVideo.notifyTime(); //Ugh! this is rude
+                } else {
+                    this.edit.text = text;
+                    this.edit.render();
                 }
+                ohd.theVideo.notifyTime(); //Ugh! this is rude
             }
         },
-        clearInitText: function() {
-            if (this.hasInitText) {
-                this.$('input').val('');
-                this.hasInitText = false;
+        keyup: function(e) {
+            if (e.keyCode == 13) {
+                this.done();
             }
         },
         focusInput: function() {
             this.$('input').focus();
         },
         notifyInputBlur: function() {
-            if (this.hasInitText) {
-                this.$el.remove();
-                ohd.theVideo.notifyInputDone();
-            }
+            this.$el.remove();
+            ohd.theVideo.notifyInputDone();
+            ohd.theVideo.notifyTime(); //Ugh! this is rude
         },
         events: {
             'keyup input': 'keyup',
-            'touchstart input': 'clearInitText'
         },
         initialize: function() {
-            this.text = (this.options.text)? this.options.text: '';
-            if (this.text.length > 0) {
-                this.hasInitText = true;
-            }
+            this.edit = this.options.edit;
+            this.text = this.options.text;
             _.bindAll(this, 'notifyInputBlur');
         },
         render: function() {
@@ -124,9 +122,23 @@ ohd.VideoWidget = (function() {
                 this.video.currentTime = this.lastPon.time;
             } else if (!this.input) {
                 var input = new ohd.InputWidget({
-                    className:'ponInput',
-                    text:this.options.initText});
+                    className:'ponInput'
+                });
                 this.video.pause();
+                input.render().$el.appendTo(this.$('#movie'));
+                input.focusInput();
+                this.input = input;
+            }
+        },
+
+        editPon: function(ponItem) {
+            this.$('#movie p').remove();
+            if (!this.input) {
+                var input = new ohd.InputWidget({
+                    className:'ponInput',
+                    text:ponItem.text,
+                    edit: ponItem
+                });
                 input.render().$el.appendTo(this.$('#movie'));
                 input.focusInput();
                 this.input = input;
@@ -165,7 +177,7 @@ ohd.VideoWidget = (function() {
             var time = this.video.currentTime,
             pon = ohd.thePon.getItem(time);
             this.$('#slider input').val(Math.floor(time * 1000));
-            if (pon == this.lastPon) {
+            if (pon == this.lastPon || this.input) {
                 return;
             }
             if (pon) {
