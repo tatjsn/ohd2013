@@ -112,7 +112,16 @@ app.use('/media', function (req, res, next) {
     media_file = url.parse(media_file).pathname;
     // make thumbnail if not exist
 
-    var suffix = '.audioWave' + '.' + AUDIO_WAVE_IMG_EXT;
+    var width  = req.query.width;
+    if (!width) {
+      width = DEFAULT_WIDTH;
+    }
+    var height  = req.query.height;
+    if (!height) {
+      height = DEFAULT_HEIGHT;
+    }
+
+    var suffix = '.audioWave.' + width + '.' + height + '.' + AUDIO_WAVE_IMG_EXT;
     var path_wave_img = path.join(__dirname, MEDIA_DIR + media_file + suffix);
     if (path.existsSync(path_wave_img)) {
       returnFile(res, path_wave_img);
