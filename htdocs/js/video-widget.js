@@ -15,10 +15,13 @@ ohd.InputWidget = (function() {
     return Backbone.View.extend({
         keyup: function(e) {
             if (e.keyCode == 13) {
+                var text = this.$('input').val();
                 this.$el.remove();
-                ohd.thePon.addItem(ohd.theVideo.video.currentTime,
-                                   this.$('input').val());
-                ohd.theVideo.notifyTime(); //Ugh! this is rude
+                ohd.theVideo.notifyInputDone();
+                if (text !== '') {
+                    ohd.thePon.addItem(ohd.theVideo.video.currentTime, text);
+                    ohd.theVideo.notifyTime(); //Ugh! this is rude
+                }
             }
         },
         clearInitText: function() {
@@ -27,19 +30,30 @@ ohd.InputWidget = (function() {
                 this.hasInitText = false;
             }
         },
+        focusInput: function() {
+            this.$('input').focus();
+        },
+        notifyInputBlur: function() {
+            if (this.hasInitText) {
+                this.$el.remove();
+                ohd.theVideo.notifyInputDone();
+            }
+        },
         events: {
             'keyup input': 'keyup',
-            'touchstart input': 'clearInitText',
+            'touchstart input': 'clearInitText'
         },
         initialize: function() {
             this.text = (this.options.text)? this.options.text: '';
             this.hasInitText = true;
+            _.bindAll(this, 'notifyInputBlur');
         },
         render: function() {
             var data = {
                 text: this.text
             };
             this.$el.html(tmpl(data));
+            this.$('input').on('blur', this.notifyInputBlur);
             return this;
         }
     });
@@ -67,12 +81,19 @@ ohd.VideoWidget = (function() {
         },
 
         pon: function() {
-            var input = new ohd.InputWidget({
-                className:'ponInput',
-                text:'面白いこと書いて！'});
-            this.video.pause();
-            input.render().$el.appendTo(this.$('#movie'));
-            //TODO ほかのボタンを押せないようにする
+            if (this.lastPon) {
+                // seek to head of pon
+                // TODO: update from sidebar
+                this.video.currentTime = this.lastPon.time;
+            } else if (!this.input) {
+                var input = new ohd.InputWidget({
+                    className:'ponInput',
+                    text:this.options.initText});
+                this.video.pause();
+                input.render().$el.appendTo(this.$('#movie'));
+                input.focusInput();
+                this.input = input;
+            }
         },
 
         notifyCanPlay: function() {
@@ -110,6 +131,10 @@ ohd.VideoWidget = (function() {
                 this.$('#movie p').remove();
             }
             this.lastPon = pon;
+        },
+
+        notifyInputDone: function() {
+            delete this.input;
         },
 
         notifySeek: function() {
