@@ -45,7 +45,9 @@ ohd.InputWidget = (function() {
         },
         initialize: function() {
             this.text = (this.options.text)? this.options.text: '';
-            this.hasInitText = true;
+            if (this.text.length > 0) {
+                this.hasInitText = true;
+            }
             _.bindAll(this, 'notifyInputBlur');
         },
         render: function() {
