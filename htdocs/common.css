@@ -125,6 +125,7 @@ body {
   background: url(images/point.png) 0 0 no-repeat;
   background-size: 32px 32px;
   z-index: 1;
+  border: none;
 }
 #movieWrap #sound {
   width: 496px;
