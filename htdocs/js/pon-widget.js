@@ -18,7 +18,7 @@ ohd.PonItemWidget = (function() {
         render: function() {
             var data = {
                 text: this.text,
-                timeFrom: this.time,
+                timeFrom: ohd.formatTime(this.time),
                 timeTo: ohd.formatTime(this.time + this.duration),
                 duration: ohd.formatTime(this.duration)
             };
