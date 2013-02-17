@@ -22,7 +22,7 @@ ohd.fullScreen = (function() {
                 .width();
             this.$full.css({
                 width: width+'px',
-                height: 'auto'
+                height: Math.floor(width * 9 / 16)+'px'
             });
             this.$hide.css('opacity', 0);
             $(document.body).addClass('full');
