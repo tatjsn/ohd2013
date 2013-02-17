@@ -50,8 +50,8 @@ if __name__ == '__main__':
     ax1.set_xticks([])
     ax1.set_yticks([])
 
-    ax1.set_xmargin(0)
-    ax1.set_ymargin(0)
+    #ax1.set_xmargin(0)
+    #ax1.set_ymargin(0)
     # axes(axisbg="#777777") # 背景
 
     plt.axis('off')

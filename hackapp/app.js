@@ -40,6 +40,9 @@ var MEDIA_DIR = '/media';
 var DEFAULT_MSEC = 0;
 var DEFAULT_WIDTH = 640;
 var DEFAULT_HEIGHT = 360;
+var IMG_EXT = 'jpg';
+var AUDIO_WAVE_IMG_EXT = 'png';
+var FFMPEG_VCODEC = 'mjpeg';
 
 app.use('/media', function (req, res, next) {
   var media_file = req.url;
@@ -77,12 +80,12 @@ app.use('/media', function (req, res, next) {
       height = DEFAULT_HEIGHT;
     }
     
-    var suffix = '.msec' + msec + '_width' + width + '_height' + height + '.png';
+    var suffix = '.msec' + msec + '_width' + width + '_height' + height + '.' + IMG_EXT;
     var path_thumbnail = path.join(__dirname, MEDIA_DIR + media_file + suffix);
     if (!path.existsSync(path_thumbnail)) {
       var sec = msec / 1000;
       var msec2 = msec % 1000;
-      var cmd = '/usr/bin/ffmpeg -i ' + path.join(__dirname, MEDIA_DIR + media_file) + ' -vframes 1 -an -ss ' + sec + '.' + msec + ' -s ' + width + 'x' + height + '  -f image2 -vcodec png' + ' ' + path_thumbnail;
+      var cmd = '/usr/bin/ffmpeg -i ' + path.join(__dirname, MEDIA_DIR + media_file) + ' -vframes 1 -an -ss ' + sec + '.' + msec + ' -s ' + width + 'x' + height + '  -f image2 -vcodec ' + FFMPEG_VCODEC + ' ' + path_thumbnail;
       console.log('CMD ' + cmd);
       var child = exec(cmd, function(err, stdout, stderr) {
         if (err) {
@@ -109,10 +112,10 @@ app.use('/media', function (req, res, next) {
     media_file = url.parse(media_file).pathname;
     // make thumbnail if not exist
 
-    var suffix = '.audioWave.png';
-    var path_wave_png = path.join(__dirname, MEDIA_DIR + media_file + suffix);
-    if (path.existsSync(path_wave_png)) {
-      returnFile(res, path_wave_png);
+    var suffix = '.audioWave' + '.' + AUDIO_WAVE_IMG_EXT;
+    var path_wave_img = path.join(__dirname, MEDIA_DIR + media_file + suffix);
+    if (path.existsSync(path_wave_img)) {
+      returnFile(res, path_wave_img);
       return;
     }
 
@@ -120,10 +123,10 @@ app.use('/media', function (req, res, next) {
     var path_wave = path.join(__dirname, MEDIA_DIR + wave_file);
 
     if (path.existsSync(path_wave)) {
-      returnConvertWaveToPng(req, res, path_wave, path_wave_png);
+      returnConvertWaveToImg(req, res, path_wave, path_wave_img);
     } else {
       var path_media = path.join(__dirname, MEDIA_DIR + media_file);
-      returnConvertMovieToPng(req, res, path_media, path_wave, path_wave_png);
+      returnConvertMovieToImg(req, res, path_media, path_wave, path_wave_img);
     }
   }
 });
@@ -136,7 +139,7 @@ function returnFile(res, path) {
   res.end();
 }
 
-function returnConvertWaveToPng(req, res, path_wave, path_wave_png) {
+function returnConvertWaveToImg(req, res, path_wave, path_wave_img) {
   var width  = req.query.width;
   if (!width) {
     width = DEFAULT_WIDTH;
@@ -146,9 +149,9 @@ function returnConvertWaveToPng(req, res, path_wave, path_wave_png) {
     height = DEFAULT_HEIGHT;
   }
 
-  var cmd_wave_to_png = 'python ./generate_audio_wave.py' + ' ' + path_wave + ' ' + width + ' ' + height + ' ' + path_wave_png;
-  console.log('CMD MAKE WAVE PNG: ' + cmd_wave_to_png);
-  var child = exec(cmd_wave_to_png, function(err, stdout, stderr) {
+  var cmd_wave_to_img = 'python ./generate_audio_wave.py' + ' ' + path_wave + ' ' + width + ' ' + height + ' ' + path_wave_img;
+  console.log('CMD MAKE WAVE IMG: ' + cmd_wave_to_img);
+  var child = exec(cmd_wave_to_img, function(err, stdout, stderr) {
     if (err) {
       console.log(err);
       // err.code will be the exit code of the child process
@@ -157,18 +160,18 @@ function returnConvertWaveToPng(req, res, path_wave, path_wave_png) {
       console.log(err.signal);
 
       res.writeHead(500, { 'Content-Type': 'text/plain' });
-      res.end('500 fail Wave to png');
+      res.end('500 fail Wave to img');
     }
-    if (!path.existsSync(path_wave_png)) {
+    if (!path.existsSync(path_wave_img)) {
       res.writeHead(500, { 'Content-Type': 'text/plain' });
-      res.end('500 fail Wave to png 2');
+      res.end('500 fail Wave to img 2');
     } else {
-      returnFile(res, path_wave_png);
+      returnFile(res, path_wave_img);
     }
   })
 }
 
-function returnConvertMovieToPng(req, res, movie_file, path_wave, path_wave_png) {
+function returnConvertMovieToImg(req, res, movie_file, path_wave, path_wave_img) {
   var cmd_movie_to_wave = '/usr/bin/ffmpeg -i ' + movie_file + ' -ac 1 ' + path_wave;
   console.log('CMD MAKE WAV: ' + cmd_movie_to_wave);
 
@@ -183,7 +186,7 @@ function returnConvertMovieToPng(req, res, movie_file, path_wave, path_wave_png)
       res.writeHead(500, { 'Content-Type': 'text/plain' });
       res.end('500 fail movie to wave');
     } else {
-      returnConvertWaveToPng(req, res, path_wave, path_wave_png);
+      returnConvertWaveToImg(req, res, path_wave, path_wave_img);
     }
   })  
 }
