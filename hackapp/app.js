@@ -85,7 +85,7 @@ app.use('/media', function (req, res, next) {
     if (!path.existsSync(path_thumbnail)) {
       var sec = msec / 1000;
       var msec2 = msec % 1000;
-      var cmd = '/usr/bin/ffmpeg -i ' + path.join(__dirname, MEDIA_DIR + media_file) + ' -vframes 1 -an -ss ' + sec + '.' + msec + ' -s ' + width + 'x' + height + '  -f image2 -vcodec ' + FFMPEG_VCODEC + ' ' + path_thumbnail;
+      var cmd = '/usr/bin/ffmpeg -i ' + path.join(__dirname, MEDIA_DIR + media_file) + ' -vframes 1 -an -ss ' + sec + '.' + msec2 + ' -s ' + width + 'x' + height + '  -f image2 -vcodec ' + FFMPEG_VCODEC + ' ' + path_thumbnail;
       console.log('CMD ' + cmd);
       var child = exec(cmd, function(err, stdout, stderr) {
         if (err) {
